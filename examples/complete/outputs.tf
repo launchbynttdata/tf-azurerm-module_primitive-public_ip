@@ -10,23 +10,42 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-output "id" {
-  value       = azurerm_public_ip.public_ip.id
+output "public_ip_id" {
+  value       = module.public_ip.id
   description = "The ID of this Public IP."
 }
 
-output "name" {
-  value       = azurerm_public_ip.public_ip.name
+output "public_ip_name" {
+  value       = module.public_ip.name
   description = "The Name of this Public IP."
 }
 
-
 output "ip_address" {
-  value       = azurerm_public_ip.public_ip.ip_address
+  value       = module.public_ip.ip_address
   description = "The IP address value that was allocated."
 }
 
 output "fqdn" {
-  value       = azurerm_public_ip.public_ip.fqdn
+  value       = module.public_ip.fqdn
   description = "Fully qualified domain name of the A DNS record associated with the public IP. domain_name_label must be specified to get the fqdn. This is the concatenation of the domain_name_label and the regionalized DNS zone"
+}
+
+output "resource_group_name" {
+  value       = local.resource_group_name
+  description = "Name of the resource group to be created."
+}
+
+output "virtual_machine_id" {
+  value       = module.virtual_machine.id
+  description = "ID of the virtual machine to be created."
+}
+
+output "virtual_machine_name" {
+  value       = local.virtual_machine_name
+  description = "Name of the virtual machine to be created."
+}
+
+output "virtual_machine_public_ip_address" {
+  value       = module.virtual_machine.public_ip_address
+  description = "IP Address of the virtual machine to be created."
 }
