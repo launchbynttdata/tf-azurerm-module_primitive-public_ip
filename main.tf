@@ -27,5 +27,5 @@ resource "azurerm_public_ip" "public_ip" {
   reverse_fqdn            = var.reverse_fqdn
   sku                     = var.sku
   sku_tier                = var.sku_tier
-  tags                    = var.tags
+  tags                    = local.tags
 }
