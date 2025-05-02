@@ -88,7 +88,7 @@ module "network_interface" {
 
   ip_configuration = [{
     name                          = "internal"
-    subnet_id                     = module.virtual_network.vnet_subnets["virtual_network"][0]
+    subnet_id                     = module.virtual_network.vnet_subnets["example_network"]["example_subnet"].id
     private_ip_address_allocation = "Dynamic"
     public_ip_address_id          = module.public_ip.id
   }]
@@ -97,7 +97,7 @@ module "network_interface" {
 
 module "virtual_network" {
   source  = "terraform.registry.launch.nttdata.com/module_collection/virtual_network/azurerm"
-  version = "~> 1.0"
+  version = "~> 1.2"
 
   network_map = local.modified_network_map
 
