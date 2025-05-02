@@ -17,7 +17,7 @@ locals {
 
   override_network_attributes_map = { for vnet_name, vnet in var.network_map : vnet_name => {
     resource_group_name = local.resource_group_name
-    vnet_name           = module.resource_names["${vnet_name}_vnet"].standard
+    vnet_name           = module.resource_names["virtual_network_vnet"].standard
     location            = var.region
     }
   }

@@ -15,7 +15,7 @@ This example includes a public IP attached to a virtual machine. Attaching the p
 
 | Name | Version |
 |------|---------|
-| <a name="provider_random"></a> [random](#provider\_random) | 3.6.3 |
+| <a name="provider_random"></a> [random](#provider\_random) | 3.7.2 |
 
 ## Modules
 
@@ -26,7 +26,7 @@ This example includes a public IP attached to a virtual machine. Attaching the p
 | <a name="module_public_ip"></a> [public\_ip](#module\_public\_ip) | ../.. | n/a |
 | <a name="module_virtual_machine"></a> [virtual\_machine](#module\_virtual\_machine) | terraform.registry.launch.nttdata.com/module_primitive/windows_virtual_machine/azurerm | ~> 1.0 |
 | <a name="module_network_interface"></a> [network\_interface](#module\_network\_interface) | terraform.registry.launch.nttdata.com/module_primitive/network_interface/azurerm | ~> 1.0 |
-| <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | terraform.registry.launch.nttdata.com/module_collection/virtual_network/azurerm | ~> 1.0 |
+| <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | terraform.registry.launch.nttdata.com/module_collection/virtual_network/azurerm | ~> 1.2.0 |
 
 ## Resources
 
@@ -54,7 +54,7 @@ This example includes a public IP attached to a virtual machine. Attaching the p
 | <a name="input_length"></a> [length](#input\_length) | Admin password generation | `number` | `24` | no |
 | <a name="input_number"></a> [number](#input\_number) | n/a | `bool` | `true` | no |
 | <a name="input_special"></a> [special](#input\_special) | n/a | `bool` | `false` | no |
-| <a name="input_network_map"></a> [network\_map](#input\_network\_map) | Map of spoke networks where vnet name is key, and value is object containing attributes to create a network | <pre>map(object({<br>    resource_group_name = optional(string)<br>    location            = optional(string)<br>    vnet_name           = optional(string)<br>    address_space       = list(string)<br>    subnet_names        = list(string)<br>    subnet_prefixes     = list(string)<br>    bgp_community       = string<br>    ddos_protection_plan = object(<br>      {<br>        enable = bool<br>        id     = string<br>      }<br>    )<br>    dns_servers                                           = list(string)<br>    nsg_ids                                               = map(string)<br>    route_tables_ids                                      = map(string)<br>    subnet_delegation                                     = map(map(any))<br>    subnet_enforce_private_link_endpoint_network_policies = map(bool)<br>    subnet_enforce_private_link_service_network_policies  = map(bool)<br>    subnet_service_endpoints                              = map(list(string))<br>    tags                                                  = map(string)<br>    tracing_tags_enabled                                  = bool<br>    tracing_tags_prefix                                   = string<br>    use_for_each                                          = bool<br>  }))</pre> | n/a | yes |
+| <a name="input_network_map"></a> [network\_map](#input\_network\_map) | Map of spoke networks where vnet name is key, and value is object containing attributes to create a network | <pre>map(object({<br>    resource_group_name = optional(string)<br>    location            = optional(string)<br>    vnet_name           = optional(string)<br>    address_space       = list(string)<br>    subnets = map(object({<br>      prefix = string<br>      delegation = optional(map(object({<br>        service_name    = string<br>        service_actions = list(string)<br>      })), {})<br>      service_endpoints                             = optional(list(string), []),<br>      private_endpoint_network_policies_enabled     = optional(bool, false)<br>      private_link_service_network_policies_enabled = optional(bool, false)<br>      network_security_group_id                     = optional(string, null)<br>      route_table_id                                = optional(string, null)<br>    }))<br>    bgp_community = string<br>    ddos_protection_plan = object(<br>      {<br>        enable = bool<br>        id     = string<br>      }<br>    )<br>    dns_servers = list(string)<br>    tags        = map(string)<br>  }))</pre> | n/a | yes |
 
 ## Outputs
 
