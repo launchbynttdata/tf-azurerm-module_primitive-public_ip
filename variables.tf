@@ -27,7 +27,8 @@ variable "location" {
 
 variable "allocation_method" {
   type        = string
-  description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic."
+  description = "(Optional) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static."
+  default     = "Static"
 
   validation {
     condition     = contains(["Static", "Dynamic"], var.allocation_method)

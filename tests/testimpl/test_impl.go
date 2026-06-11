@@ -52,7 +52,7 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 		assert.NotEqual(t, "foo", "bar", "Should never be the same!")
 	})
 
-		t.Run("PublicIPWasCreated", func(t *testing.T) {
+	t.Run("PublicIPWasCreated", func(t *testing.T) {
 		publicIP, err := publicIPClient.Get(bgCtx, rgName, expectedPublicIPName, nil)
 		if err != nil {
 			t.Error(err)
