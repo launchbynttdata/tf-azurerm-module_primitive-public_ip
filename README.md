@@ -81,9 +81,12 @@ Before running this target it is important to ensure that, developer has created
 
 ```
 provider "azurerm" {
+  subscription_id = var.subscription_id # or set ARM_SUBSCRIPTION_ID in your environment
   features {}
 }
 ```
+
+- A value for `subscription_id` in Terraform variables, or set environment variable `ARM_SUBSCRIPTION_ID`.
 
 - A file named `terraform.tfvars` which contains key value pair of variables used.
 
@@ -135,7 +138,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | (Required) Specifies the name of the Public IP. Changing this forces a new Public IP to be created. | `string` | n/a | yes |
 | <a name="input_resource_group_name"></a> [resource\_group\_name](#input\_resource\_group\_name) | (Required) The name of the resource group in which to create the Public IP. Changing this forces a new resource to be created. | `string` | n/a | yes |
 | <a name="input_location"></a> [location](#input\_location) | (Required) Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. | `string` | n/a | yes |
-| <a name="input_allocation_method"></a> [allocation\_method](#input\_allocation\_method) | (Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to static. | `string` | `"Static"` | no |
+| <a name="input_allocation_method"></a> [allocation\_method](#input\_allocation\_method) | (Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic. | `string` | n/a | yes |
 | <a name="input_zones"></a> [zones](#input\_zones) | (Optional) A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created. | `list(string)` | `[]` | no |
 | <a name="input_ddos_protection_mode"></a> [ddos\_protection\_mode](#input\_ddos\_protection\_mode) | (Optional) The DDoS protection mode of the public IP. Possible values are Disabled, Enabled, and VirtualNetworkInherited. Defaults to VirtualNetworkInherited. | `string` | `"VirtualNetworkInherited"` | no |
 | <a name="input_ddos_protection_plan_id"></a> [ddos\_protection\_plan\_id](#input\_ddos\_protection\_plan\_id) | (Optional) The Resource ID of the DDoS protection plan to associate with this Public IP. Changing this forces a new resource to be created. | `string` | `null` | no |

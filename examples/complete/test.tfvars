@@ -1,3 +1,4 @@
+
 region = "eastus2"
 size   = "Standard_B1s"
 

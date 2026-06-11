@@ -37,7 +37,7 @@ No resources.
 | <a name="input_region"></a> [region](#input\_region) | Region in which the infra needs to be provisioned | `string` | `"eastus2"` | no |
 | <a name="input_logical_product_family"></a> [logical\_product\_family](#input\_logical\_product\_family) | (Required) Name of the product family for which the resource is created.<br/>    Example: org\_name, department\_name. | `string` | `"launch"` | no |
 | <a name="input_logical_product_service"></a> [logical\_product\_service](#input\_logical\_product\_service) | (Required) Name of the product service for which the resource is created.<br/>    For example, backend, frontend, middleware etc. | `string` | `"publicip"` | no |
-| <a name="input_allocation_method"></a> [allocation\_method](#input\_allocation\_method) | (Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static. | `string` | `"Static"` | no |
+| <a name="input_allocation_method"></a> [allocation\_method](#input\_allocation\_method) | (Optional) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static. | `string` | `"Static"` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to the DNS zone | `map(string)` | `{}` | no |
 
 ## Outputs

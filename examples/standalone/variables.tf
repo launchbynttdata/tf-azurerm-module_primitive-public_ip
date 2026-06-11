@@ -97,7 +97,7 @@ variable "logical_product_service" {
 
 variable "allocation_method" {
   type        = string
-  description = "(Required) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static."
+  description = "(Optional) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static."
   default     = "Static"
 }
 
