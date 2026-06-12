@@ -27,8 +27,13 @@ variable "location" {
 
 variable "allocation_method" {
   type        = string
-  description = "(Optional) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Dynamic."
-  default     = "Dynamic"
+  description = "(Optional) Defines the allocation method for this IP address. Possible values are Static or Dynamic. Defaults to Static."
+  default     = "Static"
+
+  validation {
+    condition     = contains(["Static", "Dynamic"], var.allocation_method)
+    error_message = "allocation_method must be either Static or Dynamic."
+  }
 }
 
 variable "zones" {
@@ -41,6 +46,11 @@ variable "ddos_protection_mode" {
   type        = string
   description = "(Optional) The DDoS protection mode of the public IP. Possible values are Disabled, Enabled, and VirtualNetworkInherited. Defaults to VirtualNetworkInherited."
   default     = "VirtualNetworkInherited"
+
+  validation {
+    condition     = contains(["Disabled", "Enabled", "VirtualNetworkInherited"], var.ddos_protection_mode)
+    error_message = "ddos_protection_mode must be one of Disabled, Enabled, or VirtualNetworkInherited."
+  }
 }
 
 variable "ddos_protection_plan_id" {
@@ -69,7 +79,7 @@ variable "idle_timeout_in_minutes" {
 
 variable "ip_tags" {
   type        = map(string)
-  description = "(Optional) A mapping of tags to assign to the resource."
+  description = "(Optional) A mapping of IP tags to assign to the Public IP."
   default     = {}
 }
 
@@ -77,6 +87,11 @@ variable "ip_version" {
   type        = string
   description = "(Optional) The IP Version to use, IPv6 or IPv4. Defaults to IPv4."
   default     = "IPv4"
+
+  validation {
+    condition     = contains(["IPv4", "IPv6"], var.ip_version)
+    error_message = "ip_version must be either IPv4 or IPv6."
+  }
 }
 
 variable "public_ip_prefix_id" {
@@ -93,14 +108,24 @@ variable "reverse_fqdn" {
 
 variable "sku" {
   type        = string
-  description = "(Optional) The SKU of the Public IP. Accepted values are Basic and Standard. Defaults to Basic."
-  default     = "Basic"
+  description = "(Optional) The SKU of the Public IP. Possible values are Basic, Standard, and StandardV2. Defaults to Standard."
+  default     = "Standard"
+
+  validation {
+    condition     = contains(["Basic", "Standard", "StandardV2"], var.sku)
+    error_message = "sku must be one of Basic, Standard, or StandardV2."
+  }
 }
 
 variable "sku_tier" {
   type        = string
-  description = "(Optional) The Tier of the Public IP. This is only used for Standard sku. Accepted values are Regional and Global. Defaults to Regional."
+  description = "(Optional) The SKU tier to use for the Public IP. Possible values are Regional and Global. Defaults to Regional."
   default     = "Regional"
+
+  validation {
+    condition     = contains(["Regional", "Global"], var.sku_tier)
+    error_message = "sku_tier must be either Regional or Global."
+  }
 }
 
 variable "tags" {

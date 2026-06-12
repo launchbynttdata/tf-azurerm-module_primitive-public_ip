@@ -62,10 +62,20 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 		assert.Equal(t, expectedPublicIPName, *publicIP.Name, "Public IP Name didn't match expected.")
 	})
 
-	t.Run("PublicNotAllocatedByDefault", func(t *testing.T) {
+	t.Run("PublicIPAddressAllocated", func(t *testing.T) {
 		ctx.EnabledOnlyForTests(t, "standalone")
-		expectedPublicIPAddress := terraform.Output(t, ctx.TerratestTerraformOptions(), "ip_address")
-		assert.Empty(t, expectedPublicIPAddress, "Expected public IP address to be empty, but it was allocated!")
+
+		publicIPAddress := terraform.Output(
+			t,
+			ctx.TerratestTerraformOptions(),
+			"ip_address",
+		)
+
+		assert.NotEmpty(
+			t,
+			publicIPAddress,
+			"Expected public IP address to be allocated.",
+		)
 	})
 
 	t.Run("VirtualMachineIsAssignedPublicIP", func(t *testing.T) {
@@ -85,10 +95,10 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 		for _, nicRef := range vm.Properties.NetworkProfile.NetworkInterfaces {
 			nicID, _ := arm.ParseResourceID(*nicRef.ID)
 			nic, _ := nicClient.Get(context.Background(), nicID.ResourceGroupName, nicID.Name, nil)
+
 			for _, ipCfg := range nic.Properties.IPConfigurations {
 				assert.NotNil(t, ipCfg.Properties.PrivateIPAddress, "Private IP address must exist!")
 				assert.NotNil(t, ipCfg.Properties.PublicIPAddress, "Public IP address must exist!")
-
 			}
 		}
 	})
