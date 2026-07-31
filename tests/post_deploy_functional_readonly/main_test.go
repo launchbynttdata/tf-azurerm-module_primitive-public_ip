@@ -21,7 +21,7 @@ import (
 )
 
 const (
-	testConfigsExamplesFolderDefault = "../../examples/dns_zone_records"
+	testConfigsExamplesFolderDefault = "../../examples/standalone"
 	infraTFVarFileNameDefault        = "test.tfvars"
 )
 

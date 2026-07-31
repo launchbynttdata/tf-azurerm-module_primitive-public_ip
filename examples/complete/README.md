@@ -7,7 +7,7 @@ This example includes a public IP attached to a virtual machine. Attaching the p
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.5 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | ~> 1.3 |
 | <a name="requirement_azurerm"></a> [azurerm](#requirement\_azurerm) | >= 3.77, < 5.0 |
 | <a name="requirement_random"></a> [random](#requirement\_random) | ~> 3.6 |
 
@@ -15,17 +15,17 @@ This example includes a public IP attached to a virtual machine. Attaching the p
 
 | Name | Source | Version |
 |------|--------|---------|
-| <a name="module_network_interface"></a> [network\_interface](#module\_network\_interface) | terraform.registry.launch.nttdata.com/module_primitive/network_interface/azurerm | ~> 1.0 |
+| <a name="module_network_interface"></a> [network\_interface](#module\_network\_interface) | git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-network_interface.git | feat!/copier-conversion |
 | <a name="module_public_ip"></a> [public\_ip](#module\_public\_ip) | ../.. | n/a |
 | <a name="module_resource_group"></a> [resource\_group](#module\_resource\_group) | terraform.registry.launch.nttdata.com/module_primitive/resource_group/azurerm | ~> 1.0 |
 | <a name="module_resource_names"></a> [resource\_names](#module\_resource\_names) | terraform.registry.launch.nttdata.com/module_library/resource_name/launch | ~> 2.0 |
-| <a name="module_virtual_machine"></a> [virtual\_machine](#module\_virtual\_machine) | terraform.registry.launch.nttdata.com/module_primitive/windows_virtual_machine/azurerm | ~> 1.0 |
 | <a name="module_virtual_network"></a> [virtual\_network](#module\_virtual\_network) | terraform.registry.launch.nttdata.com/module_collection/virtual_network/azurerm | ~> 1.2 |
 
 ## Resources
 
 | Name | Type |
 |------|------|
+| [azurerm_windows_virtual_machine.virtual_machine](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/windows_virtual_machine) | resource |
 | [random_string.admin_password](https://registry.terraform.io/providers/hashicorp/random/latest/docs/resources/string) | resource |
 
 ## Inputs
