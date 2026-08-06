@@ -84,7 +84,8 @@ resource "azurerm_windows_virtual_machine" "virtual_machine" {
 }
 
 module "network_interface" {
-  source = "git::https://github.com/launchbynttdata/tf-azurerm-module_primitive-network_interface.git?ref=feat!/copier-conversion"
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/network_interface/azurerm"
+  version = "~> 1.0"
 
   name                = local.network_interface_name
   location            = var.region
