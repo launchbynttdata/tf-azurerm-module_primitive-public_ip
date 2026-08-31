@@ -53,10 +53,14 @@ module "public_ip" {
   depends_on = [module.resource_group]
 }
 
-resource "random_string" "admin_password" {
-  length  = var.length
-  numeric = var.number
-  special = var.special
+resource "random_password" "admin_password" {
+  length           = var.length
+  special          = true
+  min_lower        = 1
+  min_upper        = 1
+  min_numeric      = 1
+  min_special      = 1
+  override_special = "!@#$%*"
 }
 
 module "virtual_machine" {
@@ -69,7 +73,7 @@ module "virtual_machine" {
   size                = var.size
 
   admin_username = var.admin_username
-  admin_password = random_string.admin_password.result
+  admin_password = random_password.admin_password.result
 
   os_disk                = var.os_disk
   source_image_reference = var.source_image_reference
