@@ -41,9 +41,9 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 		fmt.Println(err)
 	}
 
-	rgName := terraform.Output(t, ctx.TerratestTerraformOptions(), "resource_group_name")
-	expectedPublicIPId := terraform.Output(t, ctx.TerratestTerraformOptions(), "public_ip_id")
-	expectedPublicIPName := terraform.Output(t, ctx.TerratestTerraformOptions(), "public_ip_name")
+	rgName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "resource_group_name")
+	expectedPublicIPId := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "public_ip_id")
+	expectedPublicIPName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "public_ip_name")
 
 	bgCtx := context.Background()
 
@@ -65,9 +65,7 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 	t.Run("PublicIPAddressAllocated", func(t *testing.T) {
 		ctx.EnabledOnlyForTests(t, "standalone")
 
-		publicIPAddress := terraform.Output(
-			t,
-			ctx.TerratestTerraformOptions(),
+		publicIPAddress := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(),
 			"ip_address",
 		)
 
@@ -81,8 +79,8 @@ func TestComposableComplete(t *testing.T, ctx types.TestContext) {
 	t.Run("VirtualMachineIsAssignedPublicIP", func(t *testing.T) {
 		ctx.EnabledOnlyForTests(t, "complete")
 
-		vmId := terraform.Output(t, ctx.TerratestTerraformOptions(), "virtual_machine_id")
-		vmName := terraform.Output(t, ctx.TerratestTerraformOptions(), "virtual_machine_name")
+		vmId := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "virtual_machine_id")
+		vmName := terraform.OutputContext(t, context.Background(), ctx.TerratestTerraformOptions(), "virtual_machine_name")
 
 		vm, err := computeClient.Get(bgCtx, rgName, vmName, nil)
 		if err != nil {
