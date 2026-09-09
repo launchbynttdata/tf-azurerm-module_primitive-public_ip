@@ -163,6 +163,16 @@ variable "length" {
   default = 24
 }
 
+variable "number" {
+  type    = bool
+  default = true
+}
+
+variable "special" {
+  type    = bool
+  default = true
+}
+
 // Networking
 
 variable "network_map" {
