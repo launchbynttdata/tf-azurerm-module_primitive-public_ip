@@ -29,7 +29,7 @@ The [.pre-commit-config.yaml](.pre-commit-config.yaml) file defines `pre-commit`
 
 ### Terratest examples
 
-Post-deploy tests in `tests/post_deploy_functional/` and `tests/post_deploy_functional_readonly/` target `examples/complete` via an explicit folder constant in each `main_test.go`. Adding another example requires a new test entry point or updating that constant; it is not picked up automatically.
+Post-deploy tests in `tests/post_deploy_functional/` and `tests/post_deploy_functional_readonly/` target `examples/standalone` via an explicit folder constant in each `main_test.go`. Adding another example requires a new test entry point or updating that constant; it is not picked up automatically.
 
 ### Local Validation
 

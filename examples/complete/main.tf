@@ -53,34 +53,33 @@ module "public_ip" {
   depends_on = [module.resource_group]
 }
 
-resource "random_string" "admin_password" {
-  length  = var.length
-  numeric = var.number
-  special = var.special
+resource "random_password" "admin_password" {
+  length           = var.length
+  special          = true
+  min_lower        = 1
+  min_upper        = 1
+  min_numeric      = 1
+  min_special      = 1
+  override_special = "!@#$%*"
 }
 
-resource "azurerm_windows_virtual_machine" "virtual_machine" {
-  name                  = local.virtual_machine_name
-  resource_group_name   = local.resource_group_name
-  location              = var.region
-  size                  = var.size
-  admin_username        = var.admin_username
-  admin_password        = random_string.admin_password.result
-  network_interface_ids = [module.network_interface.id]
+module "virtual_machine" {
+  source  = "terraform.registry.launch.nttdata.com/module_primitive/windows_virtual_machine/azurerm"
+  version = "~> 1.0"
 
-  os_disk {
-    caching              = var.os_disk.caching
-    storage_account_type = var.os_disk.storage_account_type
-  }
+  name                = local.virtual_machine_name
+  resource_group_name = local.resource_group_name
+  location            = var.region
+  size                = var.size
 
-  source_image_reference {
-    publisher = var.source_image_reference.publisher
-    offer     = var.source_image_reference.offer
-    sku       = var.source_image_reference.sku
-    version   = var.source_image_reference.version
-  }
+  admin_username = var.admin_username
+  admin_password = random_password.admin_password.result
 
-  depends_on = [module.resource_group, module.network_interface]
+  os_disk                = var.os_disk
+  source_image_reference = var.source_image_reference
+  network_interface_ids  = [module.network_interface.id]
+
+  depends_on = [module.resource_group]
 }
 
 module "network_interface" {

@@ -36,7 +36,7 @@ output "resource_group_name" {
 }
 
 output "virtual_machine_id" {
-  value       = azurerm_windows_virtual_machine.virtual_machine.id
+  value       = module.virtual_machine.id
   description = "ID of the virtual machine to be created."
 }
 
@@ -46,6 +46,6 @@ output "virtual_machine_name" {
 }
 
 output "virtual_machine_public_ip_address" {
-  value       = azurerm_windows_virtual_machine.virtual_machine.public_ip_address
+  value       = module.virtual_machine.public_ip_address
   description = "IP Address of the virtual machine to be created."
 }
