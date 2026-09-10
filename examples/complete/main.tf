@@ -65,7 +65,7 @@ resource "random_password" "admin_password" {
 
 module "virtual_machine" {
   source  = "terraform.registry.launch.nttdata.com/module_primitive/windows_virtual_machine/azurerm"
-  version = "~> 1.0"
+  version = "~> 2.0"
 
   name                = local.virtual_machine_name
   resource_group_name = local.resource_group_name
